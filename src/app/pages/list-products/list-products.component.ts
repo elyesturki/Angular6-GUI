@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Products } from '../../interfaces/products'; // Import External Interface
 
-//import service ListProduitsService
-import  { ListProduitsService } from '../../services/list-produits.service';
+//import service ListProductsService
+import  { ListProductsService } from '../../services/list-products.service';
 
 
 @Component({
-  selector: 'app-list-produits',
-  templateUrl: './list-produits.component.html',
-  styleUrls: ['./list-produits.component.css']
+  selector: 'app-list-products',
+  templateUrl: './list-products.component.html',
+  styleUrls: ['./list-products.component.css']
 })
-export class ListProduitsComponent implements OnInit {
+export class ListProductsComponent implements OnInit {
 
-  products: any[] = [];
+  products: Products[];
 
-  constructor( public listProducts: ListProduitsService ) { 
-    this.listProducts.getProducts().subscribe(data=>{
-      this.products.push(data);
+  constructor( public listProducts: ListProductsService ) { 
+    this.listProducts.getProducts().subscribe((data: Products[]) => {
+        this.products = data;
     });
   }
 
@@ -37,7 +37,7 @@ this.product= {
   thumbnailUrl:"https://via.placeholder.com/150/92c952"
 }
 ++++++++++++++++++++
-constructor( public listProducts: ListProduitsService ) { 
+constructor( public listProducts: ListProductsService ) { 
     this.listProducts.getProducts().subscribe(data=>{
       this.products.push(data);
     });

@@ -1,19 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-//import service ListProduitsService and add it in provider
-import  { ListProduitsService } from './services/list-produits.service';
+//import service ListProductsService and add it in provider
+import  { ListProductsService } from './services/list-products.service';
 
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { ListProduitsComponent } from './pages/list-produits/list-produits.component';
+import { ListProductsComponent } from './pages/list-products/list-products.component';
+import { HttpClientModule }    from '@angular/common/http';
+
 
 const appRoutes: Routes = [
  { path: 'home', component: HomePageComponent },
- { path: 'list-produits', component: ListProduitsComponent },
+ { path: 'list-products', component: ListProductsComponent },
  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -23,14 +25,15 @@ const appRoutes: Routes = [
     HomePageComponent,
     HeaderComponent,
     FooterComponent,
-    ListProduitsComponent
+    ListProductsComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    ListProduitsService
+    ListProductsService
   ],
   bootstrap: [AppComponent]
 })
