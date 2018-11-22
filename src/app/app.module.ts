@@ -1,14 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+//import service ListProduitsService and add it in provider
+import  { ListProduitsService } from './services/list-produits.service';
+
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ListProduitsComponent } from './pages/list-produits/list-produits.component';
 
 const appRoutes: Routes = [
  { path: 'home', component: HomePageComponent },
+ { path: 'list-produits', component: ListProduitsComponent },
  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -17,13 +22,16 @@ const appRoutes: Routes = [
     AppComponent,
     HomePageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ListProduitsComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    ListProduitsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
