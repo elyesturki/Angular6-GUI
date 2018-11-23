@@ -1,0 +1,7 @@
+#loader-box {
+    overflow: hidden;
+    position: relative;
+    margin: 20% auto 40px;
+    width: 150px;
+    height: 150px;
+}

@@ -1,27 +1,17 @@
-<div class="row">
-    <div class="col-sm-3">Change Search Parmas:</div>
-    <div class="col-sm-9">Products List
-    <hr>
-<div class="row"> 
-    <div class="col-sm-4" *ngFor='let product of products | slice: 0:100'>
-         <a [routerLink]="['/products', product.id]"> <img class="img-thumbnail mx-auto d-block" [src]="product.thumbnailUrl"> </a>
-          <p>{{product.id}} - {{product.title}}</p>
-    </div>
-</div>    
-
-
-    <!--{{products}}
-    <ul>
-      <li *ngFor='let product of products'>
-        {{product.id}}
-      </li>
-    </ul>
-albumId:number,
-  id:number,
-  title:string,
-  url:string,
-  thumbnailUrl:string
-    -->
-    
+<div id="loader-box" *ngIf="isLoading">
+  <div class="fa-3x">
+      <i class="fa fa-spinner fa-spin"></i>
+  </div>
 </div>
-
+<div class="row" *ngIf="!isLoading">
+    <div class="col-sm-3">Change Search Parmas:</div>
+    <div class="col-sm-9">Trouvés: {{(products | slice: 0:100).length }}
+    <hr>
+      <div class="row"> 
+        <div class="col-sm-4" *ngFor='let product of products | slice: 0:100'>
+           <a [routerLink]="['/products', product.id]"> <img class="img-thumbnail mx-auto d-block" [src]="product.thumbnailUrl"> </a>
+            <p>{{product.id}} - {{product.title}}</p>
+        </div>
+      </div>    
+    </div>
+</div>

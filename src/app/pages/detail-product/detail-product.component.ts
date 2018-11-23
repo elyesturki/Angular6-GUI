@@ -22,6 +22,7 @@ export class DetailProductComponent implements OnInit {
   @Input() public thumbnailUrl:string;*/
 
   product = {};
+  isLoading=true;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -38,12 +39,13 @@ export class DetailProductComponent implements OnInit {
     this.listProducts.getProduct(id).subscribe(data => {
         console.log(data);
         this.product = data;
+        this.isLoading = false;
     });
   };
 
   goBack(): void {
     this.location.back();
-  }
+  };
 
 }
 

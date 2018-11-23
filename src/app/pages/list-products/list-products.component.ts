@@ -13,10 +13,12 @@ import  { ListProductsService } from '../../services/list-products.service';
 export class ListProductsComponent implements OnInit {
 
   products: Products[];
+  isLoading=true;
 
   constructor( public listProducts: ListProductsService ) { 
     this.listProducts.getProducts().subscribe((data: Products[]) => {
         this.products = data;
+        this.isLoading = false;
     });
   }
 

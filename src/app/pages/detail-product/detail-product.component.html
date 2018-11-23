@@ -1,4 +1,10 @@
-<p>
+<div id="loader-box" *ngIf="isLoading">
+  <div class="fa-3x">
+      <i class="fa fa-spinner fa-spin"></i>
+  </div>
+</div>
+<div *ngIf="!isLoading">
+  <p>
   ##{{product.id}}## <button type="button" (click)="goBack()">back</button>
 </p>
 <table class="table table-dark">
@@ -12,7 +18,7 @@
     </tr>
     <tr>
       <th scope="row">url</th>
-      <td>{{product.url}}</td>
+      <td><img [src]="product.url"></td>
     </tr>
     <tr>
       <th scope="row">thumbnailUrl</th>
@@ -23,4 +29,5 @@
       <td>{{product.albumId}}</td>
     </tr>
 </table>
+</div>
 
