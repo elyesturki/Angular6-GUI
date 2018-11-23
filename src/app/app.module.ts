@@ -11,11 +11,13 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ListProductsComponent } from './pages/list-products/list-products.component';
 import { HttpClientModule }    from '@angular/common/http';
+import { DetailProductComponent } from './pages/detail-product/detail-product.component';
 
 
 const appRoutes: Routes = [
  { path: 'home', component: HomePageComponent },
- { path: 'list-products', component: ListProductsComponent },
+ { path: 'products', component: ListProductsComponent },
+ { path: "products/:id", component: DetailProductComponent },
  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
     HomePageComponent,
     HeaderComponent,
     FooterComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    DetailProductComponent
   ],
   imports: [
     BrowserModule,
