@@ -45,19 +45,26 @@ export class ListProductsService {
 
   constructor( private http: HttpClient) { }
 
-  getProducts() : Observable<any> {
-    console.log("getProducts-serv");
+  public getProducts() : Observable<any> {
     //return this.http.get<Products[]>(this.URL)  
     return this.http.get(this.URL, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   };
 
-  getProduct(id: string): Observable<any> {
+  public getProduct(id: string): Observable<any> {
     return this.http.get(`${this.URL}/${id}`).pipe(
       map(this.extractData),
       catchError(this.handleError));
+  };
+
+  public getProductsByAlbumId(albumId) {
+    return this.http.get(`${this.URL}?albumId=${albumId}`)
+      .map(response => {
+        return response;
+      });
   }
+
 }
 /*
 
