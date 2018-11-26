@@ -1,17 +1,21 @@
 
 <br>
 <div class="row">
-    <div class="col-sm-3">Filter:
+    <div class="col-sm-3">
+    Filter:
     <hr>
-      <div *ngFor='let filter of filters'>
+      <div *ngFor='let albumId of filters'>
         <div>
-          <input type="checkbox" id="{{filter}}" name="filter-{{filter}}" (click)="getProductsByAlbumId(filter)">
-          <label for="{{filter}}" style="bottom: 2px; position: relative; left: 5px; cursor: pointer">albumId-{{filter}}</label>
+          <input type="checkbox" id="{{albumId}}" name="filter-{{albumId}}" (click)="getProductsByAlbumId(albumId)">
+          <label for="{{albumId}}" style="bottom: 2px; position: relative; left: 5px; cursor: pointer">albumId-{{albumId}}</label>
         </div>
       </div>
+    <hr>
+    Filter:
+    <input [(ngModel)]="searchTitle" placeholder="Saisir texte">
     </div>
     <div class="col-sm-9">
-        Trouvés: {{ !isLoading?(products).length : ""}}
+        Trouvés: {{ !isLoading?(products | filterTitle:searchTitle ).length : ""}}
       <hr>
       <div class="row"> 
         <div id="loader-box" *ngIf="isLoading">
@@ -21,7 +25,7 @@
         </div>
       </div>
       <div class="row" *ngIf="!isLoading"> 
-        <div class="col-sm-4" *ngFor='let product of products | slice: 0:300'>
+        <div class="col-sm-4" *ngFor='let product of products | filterTitle:searchTitle | slice: 0:300'>
            <a [routerLink]="['/products', product.id]"> <img class="img-thumbnail mx-auto d-block" [src]="product.thumbnailUrl"> </a>
             <p>{{product.id}} - {{product.title}}</p>
         </div>
@@ -30,6 +34,7 @@
 </div>
 
 <!--
+[(ngModel)]="searchText"
  | slice: 0:100
 [(ngModel)]="isFilter"
 -->

@@ -4,6 +4,9 @@ import { Products } from '../../interfaces/products'; // Import External Interfa
 //import service ListProductsService
 import  { ListProductsService } from '../../services/list-products.service';
 
+//import pipe
+import { FilterTitlePipe } from '../../pipes/filter-title.pipe';
+
 
 @Component({
   selector: 'app-list-products',
@@ -52,23 +55,14 @@ export class ListProductsComponent implements OnInit {
         }
       }
     };
-
     //create this string to add url param (albumId=1&albumId=2&albumId=3&albumId=4)
     this.paramFilters = this.selectedFilters.join('&');
     console.log("paramFilters: ",this.paramFilters);
-
     this.listProducts.getProductsByAlbumId(this.paramFilters).subscribe((data: Products[]) => {
       this.products = data;
       this.isLoading = false;
     });
   }
-
-
-  public filterClicked(filter) {
-    console.log("filter: ",filter);
-  }
-
- 
 
 }
 

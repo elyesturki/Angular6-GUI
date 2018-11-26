@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 
 //import service ListProductsService and add it in provider
 import  { ListProductsService } from './services/list-products.service';
@@ -12,6 +13,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { ListProductsComponent } from './pages/list-products/list-products.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { DetailProductComponent } from './pages/detail-product/detail-product.component';
+import { FilterTitlePipe } from './pipes/filter-title.pipe';
 
 
 const appRoutes: Routes = [
@@ -28,11 +30,13 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     ListProductsComponent,
-    DetailProductComponent
+    DetailProductComponent,
+    FilterTitlePipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
