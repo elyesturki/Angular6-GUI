@@ -11,8 +11,8 @@
         </div>
       </div>
     <hr>
-    Filter:
-    <input [(ngModel)]="searchTitle" placeholder="Saisir texte">
+    Recherche par Titre:
+    <input [(ngModel)]="searchTitle" placeholder="Saisir Titre">
     </div>
     <div class="col-sm-9">
         Trouvés: {{ !isLoading?(products | filterTitle:searchTitle ).length : ""}}
