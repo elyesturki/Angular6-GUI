@@ -36,7 +36,7 @@ export class ListProductsComponent implements OnInit {
       console.log("data: ",data);
       this.products = data;
        for (let i=0; i<data.length; i++) {
-          if(this.filters.indexOf(data[i].albumId) === -1 && data[i].albumId<21) {
+          if(this.filters.indexOf(data[i].albumId) === -1 && data[i].albumId<11) {
             this.filters.push(data[i].albumId);
           }
         }
