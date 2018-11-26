@@ -16,13 +16,12 @@ export class ListProductsComponent implements OnInit {
   isLoading=true;
 
   public filters = [];
-
+  public selectedFilters = [];
+  public paramFilters = "";
 
   constructor( public listProducts: ListProductsService ) { 
     this.getProductsList();
   }
-
-  
 
 
   ngOnInit() {
@@ -43,9 +42,22 @@ export class ListProductsComponent implements OnInit {
   }
 
   public getProductsByAlbumId(filter) {
-    console.log("filter: ",filter);
-    //this.isLoading = true;
-    this.listProducts.getProductsByAlbumId(filter).subscribe((data: Products[]) => {
+    this.isLoading = true;
+    if (this.selectedFilters.indexOf("albumId="+filter)===-1) {
+      this.selectedFilters.push("albumId="+filter)
+    } else {
+      for (let i=0; i<this.selectedFilters.length; i++) {
+        if (this.selectedFilters[i]===("albumId="+filter)) {
+          this.selectedFilters.splice(i,1);  
+        }
+      }
+    };
+
+    //create this string to add url param (albumId=1&albumId=2&albumId=3&albumId=4)
+    this.paramFilters = this.selectedFilters.join('&');
+    console.log("paramFilters: ",this.paramFilters);
+
+    this.listProducts.getProductsByAlbumId(this.paramFilters).subscribe((data: Products[]) => {
       this.products = data;
       this.isLoading = false;
     });

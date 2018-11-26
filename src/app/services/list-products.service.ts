@@ -59,7 +59,7 @@ export class ListProductsService {
   };
 
   public getProductsByAlbumId(albumId) {
-    return this.http.get(`${this.URL}?albumId=${albumId}`)
+    return this.http.get(`${this.URL}?${albumId}`)
       .map(response => {
         return response;
       });

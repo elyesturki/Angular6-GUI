@@ -1,22 +1,26 @@
-<div id="loader-box" *ngIf="isLoading">
-  <div class="fa-3x">
-      <i class="fa fa-spinner fa-spin"></i>
-  </div>
-</div>
+
 <br>
-<div class="row" *ngIf="!isLoading">
+<div class="row">
     <div class="col-sm-3">Filter:
     <hr>
       <div *ngFor='let filter of filters'>
         <div>
           <input type="checkbox" id="{{filter}}" name="filter-{{filter}}" (click)="getProductsByAlbumId(filter)">
-          <label for="{{filter}}" style="bottom: 2px; position: relative; left: 5px; cursor: pointer">Filter - {{filter}}</label>
+          <label for="{{filter}}" style="bottom: 2px; position: relative; left: 5px; cursor: pointer">albumId-{{filter}}</label>
         </div>
       </div>
     </div>
-    <div class="col-sm-9">Trouvés: {{(products).length }}
+    <div class="col-sm-9">
+        Trouvés: {{(products).length }}
     <hr>
       <div class="row"> 
+        <div id="loader-box" *ngIf="isLoading">
+          <div class="fa-3x">
+            <i class="fa fa-spinner fa-spin"></i>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="!isLoading"> 
         <div class="col-sm-4" *ngFor='let product of products | slice: 0:300'>
            <a [routerLink]="['/products', product.id]"> <img class="img-thumbnail mx-auto d-block" [src]="product.thumbnailUrl"> </a>
             <p>{{product.id}} - {{product.title}}</p>
