@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="col-sm-9">
-        Trouvés: {{(products).length }}
-    <hr>
+        Trouvés: {{ !isLoading?(products).length : ""}}
+      <hr>
       <div class="row"> 
         <div id="loader-box" *ngIf="isLoading">
           <div class="fa-3x">
