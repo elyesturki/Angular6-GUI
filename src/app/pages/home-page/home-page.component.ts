@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpHeaderResponse } from '@angular/common/http';
+ 
+
 
 @Component({
   selector: 'app-home-page',
@@ -9,6 +11,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpHeaderResponse } from '
 })
 export class HomePageComponent implements OnInit {
 
+
   searchData: any = {};
 
   constructor( private http: HttpClient ) { 
@@ -16,6 +19,7 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.myDiv)
   }
 
   onSubmit() {
@@ -28,3 +32,28 @@ export class HomePageComponent implements OnInit {
   }
 
 }
+ 
+
+/*
+  // Trigger test // 
+  // In View : <div #myDiv class="btn btn-primary" (click)="testFn()">Trigger</div>
+
+  // In component :
+  testFn() {
+    console.log('fn OK4 !!!');
+  }
+  @ViewChild('myDiv') myDiv: ElementRef;
+  triggerFalseClick() {
+    // let el: HTMLElement = this.myDiv.nativeElement as HTMLElement;
+    // el.click();
+    // OU
+    setTimeout(()=> {
+      this.myDiv.nativeElement.click();
+      this.triggerFalseClick();
+    } , 1000)
+    
+  }
+  
+  // on fait appel à 
+  //fin Trigger test this.triggerFalseClick() dans ngOnInit()
+*/
