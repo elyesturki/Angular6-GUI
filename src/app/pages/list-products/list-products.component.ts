@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Products } from '../../interfaces/products'; // Import External Interface
 
+import { ActivatedRoute } from '@angular/router';
+
 //import service ListProductsService
 import  { ListProductsService } from '../../services/list-products.service';
 
@@ -22,17 +24,23 @@ export class ListProductsComponent implements OnInit {
   public selectedFilters = [];
   public paramFilters = "";
 
-  constructor( public listProducts: ListProductsService ) { 
-    this.getProductsList();
+  searchParams: string;
+
+  constructor( public listProducts: ListProductsService, private route: ActivatedRoute ) { 
+   
   }
 
 
   ngOnInit() {
-    //console.log("filter: ",this.isFilter);
+    this.searchParams = this.route.snapshot.params.params;
+    console.log("searchParams: ",this.searchParams);
+
+    this.getProductsList(this.searchParams);
+    
   }
 
-  public getProductsList() {
-    this.listProducts.getProducts().subscribe((data: Products[]) => {
+  public getProductsList(params) {
+    this.listProducts.getProducts(params).subscribe((data: Products[]) => {
       console.log("data: ",data);
       this.products = data;
        for (let i=0; i<data.length; i++) {
@@ -55,6 +63,9 @@ export class ListProductsComponent implements OnInit {
         }
       }
     };
+    if (!this.selectedFilters.length) {
+      this.getProductsList('');
+    }
     //create this string to add url param (albumId=1&albumId=2&albumId=3&albumId=4)
     this.paramFilters = this.selectedFilters.join('&');
     console.log("paramFilters: ",this.paramFilters);

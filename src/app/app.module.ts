@@ -18,8 +18,14 @@ import { FilterTitlePipe } from './pipes/filter-title.pipe';
 
 const appRoutes: Routes = [
  { path: 'home', component: HomePageComponent },
- { path: 'products', component: ListProductsComponent },
- { path: "products/:id", component: DetailProductComponent },
+ /*{  path: 'products',
+    component: ListProductsComponent,
+    children: [
+      { path: ':params', component: ListProductsComponent },
+    ] 
+ },*/
+ { path: 'products/:params', component: ListProductsComponent },
+ { path: "product/:id", component: DetailProductComponent },
  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

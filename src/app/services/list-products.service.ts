@@ -45,9 +45,9 @@ export class ListProductsService {
 
   constructor( private http: HttpClient) { }
 
-  public getProducts() : Observable<any> {
+  public getProducts(params) : Observable<any> {
     //return this.http.get<Products[]>(this.URL)  
-    return this.http.get(this.URL, httpOptions).pipe(
+    return this.http.get(`${this.URL}?${params}`, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError));
   };
