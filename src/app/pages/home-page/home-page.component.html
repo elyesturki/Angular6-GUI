@@ -6,12 +6,13 @@
                 <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                     <div class="form-group">
                         <label for="albumId">Id Album</label>: 
-                        <select name="albumId" [(ngModel)]="searchData.albumId" #albumId="ngModel">
+                        <select name="albumId" [(ngModel)]="searchData.albumId" #albumId="ngModel" (change)="isSelectedAlbum=true">
                             <option *ngFor="let albumID of albumIdList" [value]="albumID">
                             {{albumID}}
                             </option>
-                        </select>
+                        </select>  <span *ngIf="!isSelectedAlbum" [ngStyle]="{'color' : 'red'}"> Veuillez choisir un id Album</span>
                     </div>
+
                     <!--<div class="form-group">
                         <label for="title">Titre</label>
                         <input type="text" class="form-control" name="title" [(ngModel)]="searchData.title" #title="ngModel" autofocus required/>

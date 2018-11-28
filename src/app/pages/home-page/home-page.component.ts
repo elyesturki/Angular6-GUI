@@ -19,6 +19,8 @@ export class HomePageComponent implements OnInit {
   public params;
   searchData: any = {};
 
+  isSelectedAlbum=true;
+
   constructor( private http: HttpClient, private router: Router, private listProducts: ListProductsService) {
     this.getlbumIdList()
   }
@@ -41,11 +43,16 @@ export class HomePageComponent implements OnInit {
   onSubmit() {
     //console.log("this.searchData1: ",this.searchData);
     //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.searchData))
+
+    if (!this.searchData.albumId) {
+      this.isSelectedAlbum=false;
+      return
+    }
+
     this.params = new HttpParams()
     // .set('title', this.searchData.title)
     .set('albumId', this.searchData.albumId);
     var searchParams = this.params.toString();
-    //console.log("pathParams2: ",searchParams);
     this.router.navigate( [ '/products', searchParams ] );
   }  
 
