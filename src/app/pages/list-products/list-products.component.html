@@ -4,10 +4,12 @@
     <div class="col-sm-3">
     Filter:
     <hr>
-      <div *ngFor='let albumId of filters'>
+      <div *ngFor='let item of filtersStatus'>
         <div>
-          <input type="checkbox" id="{{albumId}}" name="filter-{{albumId}}" (click)="getProductsByAlbumId(albumId)">
-          <label for="{{albumId}}" style="bottom: 2px; position: relative; left: 5px; cursor: pointer">albumId-{{albumId}}</label>
+          <input type="checkbox" id="{{item.albId}}" name="filter-{{item.albId}}" (click)="getProductsByAlbumId(item.albId)" 
+          [(ngModel)]="item.status">
+          <label for="{{item.albId}}" style="bottom: 2px; position: relative; left: 5px; cursor: pointer">albumId-{{item.albId}} 
+          <span [ngStyle]="{'background-color': item.status ? 'green' : 'red' }">({{item.status}})</span></label>
         </div>
       </div>
     <hr>

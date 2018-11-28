@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Products } from '../../interfaces/products'; // Import External Interface
 
 import { ActivatedRoute } from '@angular/router';
@@ -17,14 +17,22 @@ import { FilterTitlePipe } from '../../pipes/filter-title.pipe';
 })
 export class ListProductsComponent implements OnInit {
 
+  /**/
+  isChecked=false;
+  /**/
+
   products: Products[];
   isLoading=true;
 
   public filters = [];
+  public filtersStatus = [];
+
   public selectedFilters = [];
   public paramFilters = "";
 
   searchParams: string;
+
+  searchParamsFilter = [];
 
   constructor( public listProducts: ListProductsService, private route: ActivatedRoute ) { 
    
@@ -35,24 +43,55 @@ export class ListProductsComponent implements OnInit {
     this.searchParams = this.route.snapshot.params.params;
     console.log("searchParams: ",this.searchParams);
 
-    this.getProductsList(this.searchParams);
-    
+    this.searchParamsFilter = this.searchParams.split('=');
+    console.log("searchParamsFilter: ",this.searchParamsFilter);
+    if (this.searchParamsFilter[1]) {
+      this.getAlbumList(this.searchParamsFilter[1])
+      this.getProductsByAlbumId(this.searchParamsFilter[1]);
+    }
+  }
+
+  public getAlbumList(idParams) {
+    var filtersTab = this.filters
+    this.listProducts.getProducts('').subscribe((data: Products[]) => {
+      console.log("data: ", data, idParams);
+        for (let i=0; i<data.length; i++) {
+          data[i].status=false;
+          if (data[i].albumId == idParams) {
+             data[i].status=true; 
+          }
+          if(this.filters.indexOf(data[i].albumId) === -1 && data[i].albumId<11) {
+            this.filters.push(data[i].albumId);
+            this.filtersStatus.push({
+              'albId':data[i].albumId,
+              'status': data[i].status
+            });
+          }
+        };
+      this.isLoading = false;
+    });
   }
 
   public getProductsList(params) {
     this.listProducts.getProducts(params).subscribe((data: Products[]) => {
       console.log("data: ",data);
       this.products = data;
-       for (let i=0; i<data.length; i++) {
-          if(this.filters.indexOf(data[i].albumId) === -1 && data[i].albumId<11) {
-            this.filters.push(data[i].albumId);
-          }
-        }
       this.isLoading = false;
     });
   }
 
   public getProductsByAlbumId(filter) {
+    console.log("filter3: ",filter)
+    if (filter==undefined) {
+      filter=1;
+    }
+    // change stat of item
+    for (var i=0; i<this.filters.length; i++) {
+        if (this.filters[i].name === filter) {
+          this.filters[i].status = !this.filters[i].status;
+        }
+    }
+
     this.isLoading = true;
     if (this.selectedFilters.indexOf("albumId="+filter)===-1) {
       this.selectedFilters.push("albumId="+filter)
@@ -118,3 +157,9 @@ random+++++++++++++++++++
   }
   console.log("filterTab: ",this.filters.sort((n1,n2) => n1 - n2));
     */
+
+ /*
+checkbox:
+https://stackblitz.com/edit/angular-abelrm
+
+ */
