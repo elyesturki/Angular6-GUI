@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Products } from '../../interfaces/products'; // Import External Interface
-
 import { ActivatedRoute } from '@angular/router';
 
 //import service ListProductsService
@@ -16,10 +15,6 @@ import { FilterTitlePipe } from '../../pipes/filter-title.pipe';
   styleUrls: ['./list-products.component.css']
 })
 export class ListProductsComponent implements OnInit {
-
-  /**/
-  isChecked=false;
-  /**/
 
   products: Products[];
   isLoading=true;
@@ -42,9 +37,7 @@ export class ListProductsComponent implements OnInit {
   ngOnInit() {
     this.searchParams = this.route.snapshot.params.params;
     console.log("searchParams: ",this.searchParams);
-
     this.searchParamsFilter = this.searchParams.split('=');
-    console.log("searchParamsFilter: ",this.searchParamsFilter);
     if (this.searchParamsFilter[1]) {
       this.getAlbumList(this.searchParamsFilter[1])
       this.getProductsByAlbumId(this.searchParamsFilter[1]);
@@ -52,9 +45,9 @@ export class ListProductsComponent implements OnInit {
   }
 
   public getAlbumList(idParams) {
-    var filtersTab = this.filters
+   // get Filter-albumId from homepage and display it into products-list page
     this.listProducts.getProducts('').subscribe((data: Products[]) => {
-      console.log("data: ", data, idParams);
+      console.log("data: ", data, "idParams: ",idParams);
         for (let i=0; i<data.length; i++) {
           data[i].status=false;
           if (data[i].albumId == idParams) {
@@ -81,7 +74,7 @@ export class ListProductsComponent implements OnInit {
   }
 
   public getProductsByAlbumId(filter) {
-    console.log("filter3: ",filter)
+    console.log("filter-getProductsByAlbumId: ",filter)
     if (filter==undefined) {
       filter=1;
     }
@@ -107,7 +100,6 @@ export class ListProductsComponent implements OnInit {
     }
     //create this string to add url param (albumId=1&albumId=2&albumId=3&albumId=4)
     this.paramFilters = this.selectedFilters.join('&');
-    console.log("paramFilters: ",this.paramFilters);
     this.listProducts.getProductsByAlbumId(this.paramFilters).subscribe((data: Products[]) => {
       this.products = data;
       this.isLoading = false;
