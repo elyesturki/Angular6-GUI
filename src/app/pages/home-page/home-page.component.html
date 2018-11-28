@@ -2,16 +2,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h3>Moteur de Recherche: </h3>
+                <h3>Recherche: </h3>
                 <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
                     <div class="form-group">
+                        <label for="albumId">Id Album</label>: 
+                        <select name="albumId" [(ngModel)]="searchData.albumId" #albumId="ngModel">
+                            <option *ngFor="let albumID of albumIdList" [value]="albumID">
+                            {{albumID}}
+                            </option>
+                        </select>
+                    </div>
+                    <!--<div class="form-group">
                         <label for="title">Titre</label>
                         <input type="text" class="form-control" name="title" [(ngModel)]="searchData.title" #title="ngModel" autofocus required/>
                     </div>
                     <div class="form-group">
                         <label for="albumId">Id Album</label>
                         <input type="text" class="form-control" name="albumId" [(ngModel)]="searchData.albumId" #albumId="ngModel" required/>
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <button class="btn btn-primary">Recherche</button>
                     </div>
