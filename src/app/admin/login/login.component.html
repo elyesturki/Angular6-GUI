@@ -1,0 +1,14 @@
+<br>
+<h3>Login Page:</h3>
+<form name="formun" (ngSubmit)="loginUser($event)">
+  <div class="form-group">
+      <input type="text" class="form-control" id="username" placeholder="Username"  (change)="showMessage=false" />
+  </div>
+  <div class="form-group">
+      <input type="password" class="form-control" id="password" required placeholder="password" (change)="showMessage=false" />
+  </div>
+  <div class="form-group">
+      <button class="btn btn-primary">Login</button>
+      <div *ngIf="showMessage" class="mt-2 alert col-sm-3" [ngClass]=" errorClass ? 'alert-danger' : 'alert-success'" role="alert">{{loginMessage}}</div>
+  </div>
+</form>

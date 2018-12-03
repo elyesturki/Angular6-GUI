@@ -14,6 +14,8 @@ import { ListProductsComponent } from './pages/list-products/list-products.compo
 import { HttpClientModule }    from '@angular/common/http';
 import { DetailProductComponent } from './pages/detail-product/detail-product.component';
 import { FilterTitlePipe } from './pipes/filter-title.pipe';
+import { LoginComponent } from './admin/login/login.component';
+import { AdminComponent } from './admin/admin/admin.component';
 
 
 const appRoutes: Routes = [
@@ -26,6 +28,8 @@ const appRoutes: Routes = [
  },*/
  { path: 'products/:params', component: ListProductsComponent },
  { path: "product/:id", component: DetailProductComponent },
+ { path: "login", component: LoginComponent },
+ { path: "admin", component: AdminComponent },
  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -37,7 +41,9 @@ const appRoutes: Routes = [
     FooterComponent,
     ListProductsComponent,
     DetailProductComponent,
-    FilterTitlePipe
+    FilterTitlePipe,
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
