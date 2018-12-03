@@ -7,11 +7,14 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
+
 
   loginMessage="";
   errorClass:boolean=false;
   showMessage:boolean=false;
+
 
   constructor( private Auth: AuthService) { }
 
@@ -27,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     console.log(username, password)
 
-    this.Auth.getUserDetails(username, password).subscribe(data => {
+    this.Auth.getUserDetails(username, password).subscribe( (data: any) => {
       console.log("data: ",data);
       this.loginMessage=data.message;
       this.showMessage = true;
