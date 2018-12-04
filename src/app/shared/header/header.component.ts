@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 
 import * as $ from 'jquery';
 
@@ -9,11 +9,16 @@ import * as $ from 'jquery';
 })
 export class HeaderComponent implements OnInit {
   
+  @Input('company') companyName: string;
+
   constructor() {
 
   }
 
   ngOnInit() {
+
+    console.log("companyName: ",this.companyName)
+
     $(document).ready(function(){
 
       $('.burger').click(function(){
