@@ -15,11 +15,27 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     $(document).ready(function(){
-        
-    });
-  }
 
-  
+      $('.burger').click(function(){
+        $('header').toggleClass('clicked');
+      });
+
+      $('nav ul li').click(function(){
+        $('nav ul li').removeClass('selected');
+        $('nav ul li').addClass('notselected');
+        $(this).toggleClass('selected');
+        $(this).removeClass('notselected');
+      });
+      /***/
+      /*$(window).scroll(function() {
+        if ($(this).scrollTop() > 80) {
+          $('#header').addClass('header-scrolled');
+        } else {
+          $('#header').removeClass('header-scrolled');
+        }
+       });*/
+    }); 
+  } //end ngOnInit
 
 }
 

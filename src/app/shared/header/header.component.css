@@ -1,7 +1,304 @@
-#header {
-    background: #000;
-    padding: 0 0 20px 0;
-    color: #eee;
-    font-size: 14px;
-    height: 80px
+
+#header *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+#header{
+  height: 80px;
+  width: 100%;
+  position: relative;
+  background-color: #111;
+  box-shadow: 0px 2px 5px rgba(0,0,0,.4);
+}
+#header h1 {width: 300px; height: 100%}
+.logo {
+  padding-left:15px !important;
+  padding-top:5px !important;
+  height: 60px;
+  display: block;
+  position: relative;
+  top: 10px;
+  left:50px;
+  font-size: 26px;
+  line-height: 1;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border-left: 4px solid #b6ca06;
+  color: #444;
+  transition: all .1s ease-in;
+  -webkit-transition: all .1s ease-in;
+  
+}
+.logo:hover {
+  text-decoration: none !important;
+  color: #ccc;
+  transition: all .1s ease-in;
+  -webkit-transition: all .1s ease-in;
+}
+.timlogo{
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+  padding-top: 15px;
+}
+.head{
+  position: absolute;
+  top: 20px;
+  right: 50px;
+}
+.head .tile{
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+.head .tile.socialmedia{
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+  line-height: 30px;
+  position: relative;
+  margin-right: 5px !important
+}
+#header.clicked .head {
+  z-index: 100
+}
+#header.clicked .head .tile.socialmedia{
+  color: white;
+}
+.head .burger{
+  margin-left: 25px !important;
+  padding: 5px;
+  cursor: pointer;
+  background-color: transparent;
+}
+.meat{
+  height: 40px;
+  width: 40px;
+  position: relative;
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+#header.clicked .head .burger .meat{
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+.meat .line{
+  height: 4px;
+  width: 40px;
+  background-color: #b6ca06;
+  border-radius: 3px;
+  position: absolute;
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+.meat .line.one{top: 5px; left: 0px;}
+.meat .line.two{top: 18px; left: 0px;}
+.meat .line.three{top: 31px; left: 0px;}
+
+#header.clicked .burger .line{
+  background-color: white;
+}
+#header.clicked .burger .line.one{
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  top: 18px;
+}
+#header.clicked .burger .line.two{
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  top: 18px;
+}
+#header.clicked .burger .line.three{
+  opacity: 0;
+}
+#header.clicked .burger:hover .meat{
+  transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+}
+
+.nav-modal{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  pointer-events: none;
+  z-index: 99;
+}
+#header.clicked .nav-modal{
+  visibility: visible;
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.nav-modal .blob{
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  margin: 0 auto;
+  background-color: #222;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transition: all .3s ease-in;
+}
+#header.clicked .nav-modal .blob{
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0px;
+}
+
+nav{
+  position: fixed;
+  left: 20%;
+  top: 30%;
+  color: white;
+}
+nav a{
+  color: white;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-family: 'Oswald', sans-serif;
+  font-size: 30px;
+}
+nav ul li{
+  list-style: none;
+  text-align: right;
+  border-right: 6px solid #b6ca06;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  position: relative;
+}
+nav{
+  opacity: 0;
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  -webkit-transition-delay: .3s;
+  -moz-transition-delay: .3s;
+  -o-transition-delay: .3s;
+  transition-delay: .3s;
+}
+#header.clicked nav{
+  opacity: 1;
+}
+
+nav ul li ul{
+  position: absolute;
+  right: -300px;
+  top: -4px;
+  display: none;
+}
+nav ul li ul li{
+  border: none;
+  padding-bottom: 10;
+  padding-left: 10px;
+  height: 50px;
+  width: 300px;
+}
+nav ul li ul li a{
+  display: block;
+  height: 50px;
+  font-size: 20px;
+  text-align: left;
+  padding: 10px;
+}
+nav ul li.selected ul{
+  display: block;
+}
+
+nav ul li.notselected a{
+  opacity: .5;
+}
+nav ul li.selected ul li a{
+  opacity: 1;
+}
+
+
+/****/
+@media screen and (max-width:820px){
+  .timlogo{margin-left: 50px;}
+}
+@media screen and (max-width:580px){
+  .timlogo{width: 130px; padding-top: 30px;}
+  nav ul li a{
+    font-size: 16px;
+  }
+  nav ul li ul{
+    top: -9px;
+  }
+  nav ul li ul li{
+    height: 40px;
+  }
+  nav ul li ul li a{
+    font-size: 16px;
+    height: 40px;
+  }
+  .logo {
+    padding-left:10px !important;
+    padding-top:0px !important;
+    height: 40px;
+    top: 20px;
+    left:20px;
+    font-size: 22px;
+    line-height: 0.9;
+    letter-spacing: 0px;
+    color: #444;
+  }
+  #header h1 {width: 220px;}
+
+}
+@media screen and (max-width:500px){
+  .timlogo{display: none;}
+}
+@media screen and (max-width:320px){
+  #header .head .tile.socialmedia{
+    display: none;
+  }
+}
+
+/***dropmenu**/
+
+
+
+#header #nav .dropmenu:after {
+  font-family: 'FontAwesome';
+  content: "\f107";
+  position: absolute;
+  margin-left: 5px
+  
+}
+
+#header #nav li.selected .dropmenu:after {
+  content: "\f105";
+}
+
+#header #nav .dropmenu {
+
+}
+#header .dropmenu .menu {
+  
+}
+@media screen and (min-width:581px){
+  #header #nav a { padding: 10px 30px 10px 10px}
+}
+@media screen and (max-width:581px){
+  #header #nav a { padding: 10px 20px 10px 10px}
+  #header .menu .notselected {height: 30px; padding-top:10px;}
+  #header .menu .notselected a {
+    padding: 0px 10px !important;
+    height: auto !important;
+  }
+}
+
