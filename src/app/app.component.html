@@ -1,6 +1,6 @@
-<app-header company="Elyes COM" [(name)]="name"></app-header>
+<app-header company="{{varName}}" [(name)]="name"></app-header>
 <div class="container" style="min-height: 550px; padding-top:10px">
   Hi {{name}}
     <router-outlet></router-outlet>
 </div>
-<app-footer company="Elyes COM"></app-footer>
+<app-footer company="{{varName}}"></app-footer>

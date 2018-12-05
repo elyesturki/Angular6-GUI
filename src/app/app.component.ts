@@ -10,11 +10,13 @@ import * as $ from 'jquery';
 export class AppComponent {
   title = 'angular6-gui';
 
-  name = 'Elyes';
+  name = 'Elyes7';
 
   changeName(name){
     this.name = name;
   }
+
+  varName: string = 'test33';
 
   public ngOnInit()
   {

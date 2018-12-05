@@ -10,8 +10,7 @@ import * as $ from 'jquery';
 export class HeaderComponent implements OnInit {
    
   @Input('company') companyName: string;
-
-
+  
   nameValue: string;
 
   @Output() nameChange: EventEmitter<any> = new EventEmitter();
@@ -36,7 +35,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    //console.log("companyName: ",this.companyName)
+   // this.companyName = this.varName;
 
     $(document).ready(function(){
 
