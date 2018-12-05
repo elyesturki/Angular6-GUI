@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import * as $ from 'jquery';
 
@@ -8,8 +8,27 @@ import * as $ from 'jquery';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  
+   
   @Input('company') companyName: string;
+
+
+  nameValue: string;
+
+  @Output() nameChange: EventEmitter<any> = new EventEmitter();
+
+  changeName(val){
+    this.name = val;
+  }
+
+  @Input() 
+  get name() {
+    return this.nameValue;
+  }
+  
+  set name(val) {
+    this.nameValue = val;
+    this.nameChange.emit(this.nameValue);
+  }
 
   constructor() {
 
@@ -17,7 +36,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log("companyName: ",this.companyName)
+    //console.log("companyName: ",this.companyName)
 
     $(document).ready(function(){
 
