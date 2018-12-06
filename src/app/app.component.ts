@@ -10,18 +10,7 @@ import * as $ from 'jquery';
 export class AppComponent {
   title = 'angular6-gui';
 
-  name = 'Elyes7';
-
-  changeName(name){
-    this.name = name;
-  }
-
-  getNotification(evt) {
-    console.log("evt: ",evt);
-      this.name = evt;
-    }
-
-  varName: string = 'test33';
+  companyName: string = 'Elyes COM';
 
   public ngOnInit()
   {

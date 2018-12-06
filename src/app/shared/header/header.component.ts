@@ -10,32 +10,12 @@ import * as $ from 'jquery';
 export class HeaderComponent implements OnInit {
    
   @Input('company') companyName: string;
-  
-  nameValue: string;
-
-  @Output() nameChange: EventEmitter<any> = new EventEmitter();
-
-  changeName(val){
-    this.name = val;
-  }
-
-  @Input() 
-  get name() {
-    return this.nameValue;
-  }
-  
-  set name(val) {
-    this.nameValue = val;
-    this.nameChange.emit(this.nameValue);
-  }
 
   constructor() {
 
   }
 
   ngOnInit() {
-
-   // this.companyName = this.varName;
 
     $(document).ready(function(){
 
