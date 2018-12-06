@@ -3,4 +3,4 @@
   Hi {{name}}
     <router-outlet></router-outlet>
 </div>
-<app-footer company="{{varName}}"></app-footer>
+<app-footer company="{{varName}}" (notifyParent)="getNotification($event)"></app-footer>

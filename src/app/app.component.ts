@@ -16,6 +16,11 @@ export class AppComponent {
     this.name = name;
   }
 
+  getNotification(evt) {
+    console.log("evt: ",evt);
+      this.name = evt;
+    }
+
   varName: string = 'test33';
 
   public ngOnInit()
