@@ -16,6 +16,7 @@ import { DetailProductComponent } from './pages/detail-product/detail-product.co
 import { FilterTitlePipe } from './pipes/filter-title.pipe';
 import { LoginComponent } from './admin/login/login.component';
 import { AdminComponent } from './admin/admin/admin.component';
+import { SearchHomeComponent } from './components/search-home/search-home.component';
 
 
 const appRoutes: Routes = [
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     DetailProductComponent,
     FilterTitlePipe,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    SearchHomeComponent
   ],
   imports: [
     BrowserModule,
