@@ -100,6 +100,7 @@ export class ListProductsComponent implements OnInit {
     }
     //create this string to add url param (albumId=1&albumId=2&albumId=3&albumId=4)
     this.paramFilters = this.selectedFilters.join('&');
+    console.log("this.paramFilters: ",this.paramFilters)
     this.listProducts.getProductsByAlbumId(this.paramFilters).subscribe((data: Products[]) => {
       this.products = data;
       this.isLoading = false;

@@ -3,15 +3,34 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h3>Recherche: </h3>
-                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-                    <div class="form-group">
+                <form (ngSubmit)="onSubmit($event)">
+                    
+                  <div class="multiselect">
+                    <div class="selectBox" (click)="showCheckboxes()">
+                      <select name="albumId" [(ngModel)]="searchData.albumId" #albumId="ngModel" (change)="isSelectedAlbum=true">
+                        <option>Select an option</option>
+                      </select>
+                      <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxes">
+                      <label *ngFor="let albumID of albumIdList">
+                        <input type="checkbox" id="{{albumID}}" value="{{albumID}}" />{{albumID}}</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="form-group">
+                        <button class="btn btn-primary">Recherche</button>
+                  </div>
+                    <span *ngIf="!isSelectedAlbum" [ngStyle]="{'color' : 'red'}"> Veuillez choisir un id Album</span>
+
+                    <!--<div class="form-group">
                         <label for="albumId">Id Album</label>: 
                         <select name="albumId" [(ngModel)]="searchData.albumId" #albumId="ngModel" (change)="isSelectedAlbum=true">
                             <option *ngFor="let albumID of albumIdList" [value]="albumID">
                             {{albumID}}
                             </option>
                         </select>  <span *ngIf="!isSelectedAlbum" [ngStyle]="{'color' : 'red'}"> Veuillez choisir un id Album</span>
-                    </div>
+                    </div>-->
 
                     <!--<div class="form-group">
                         <label for="title">Titre</label>
@@ -21,9 +40,7 @@
                         <label for="albumId">Id Album</label>
                         <input type="text" class="form-control" name="albumId" [(ngModel)]="searchData.albumId" #albumId="ngModel" required/>
                     </div>-->
-                    <div class="form-group">
-                        <button class="btn btn-primary">Recherche</button>
-                    </div>
+
                 </form>
             </div>
         </div>
