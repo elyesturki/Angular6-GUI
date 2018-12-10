@@ -45,12 +45,12 @@ export class ListProductsService {
 
   constructor( private http: HttpClient) { }
 
-  public getProducts(params) : Observable<any> {
-    //return this.http.get<Products[]>(this.URL)  
-    return this.http.get(`${this.URL}?${params}`, httpOptions).pipe(
-      map(this.extractData),
-      catchError(this.handleError));
-  };
+  public getProducts(params) {
+    return this.http.get(`${this.URL}?${params}`)
+    .map(response => {
+      return response;
+    });
+  }
 
   public getProduct(id: string): Observable<any> {
     return this.http.get(`${this.URL}/${id}`).pipe(
@@ -58,16 +58,15 @@ export class ListProductsService {
       catchError(this.handleError));
   };
 
-  public getProductsByAlbumId(albumId) {
-    return this.http.get(`${this.URL}?${albumId}`)
-      .map(response => {
-        return response;
-      });
-  }
-
 }
 /*
-
+public getProducts_old(params) : Observable<any> {
+    //return this.http.get<Products[]>(this.URL)  
+    return this.http.get(`${this.URL}?${params}`, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  };
+  ////
 .map(res => res.json())
     .subscribe(
       data=> console.log("data ser: ",data),

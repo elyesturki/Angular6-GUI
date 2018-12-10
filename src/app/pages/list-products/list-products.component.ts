@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Products } from '../../interfaces/products'; // Import External Interface
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 //import service ListProductsService
 import  { ListProductsService } from '../../services/list-products.service';
@@ -22,94 +22,81 @@ export class ListProductsComponent implements OnInit {
   public filters = [];
   public filtersStatus = [];
 
-  public selectedFilters = [];
   public paramFilters = "";
 
-  searchParams: string;
+  strParams;
 
-  searchParamsFilter = [];
+  tabStrParams = [];
+  tabIDParams = [];
 
-  constructor( public listProducts: ListProductsService, private route: ActivatedRoute ) { 
+  tabFinaId = [];
+  constructor( public listProducts: ListProductsService, private route: ActivatedRoute, private router: Router ) { 
    
   }
 
 
   ngOnInit() {
-    this.searchParams = this.route.snapshot.params.params;
-    console.log("searchParams: ",this.searchParams);
-    this.searchParamsFilter = this.searchParams.split('=');
-    if (this.searchParamsFilter[1]) {
-      this.getAlbumList(this.searchParamsFilter[1])
-      this.getProductsByAlbumId(this.searchParamsFilter[1]);
-    }
+    this.strParams = this.route.snapshot.params.params;
+    console.log("strParams getURL: ",this.strParams);
+    this.getProducts(this.strParams);
+    this.getAlbumList(this.strParams);
+    
   }
 
-  public getAlbumList(idParams) {
-   // get Filter-albumId from homepage and display it into products-list page
-    this.listProducts.getProducts('').subscribe((data: Products[]) => {
-      console.log("data: ", data, "idParams: ",idParams);
-        for (let i=0; i<data.length; i++) {
-          data[i].status=false;
-          if (data[i].albumId == idParams) {
-             data[i].status=true; 
-          }
-          if(this.filters.indexOf(data[i].albumId) === -1 && data[i].albumId<11) {
-            this.filters.push(data[i].albumId);
-            this.filtersStatus.push({
-              'albId':data[i].albumId,
-              'status': data[i].status
-            });
-          }
-        };
-      this.isLoading = false;
-    });
-  }
-
-  public getProductsList(params) {
-    this.listProducts.getProducts(params).subscribe((data: Products[]) => {
-      console.log("data: ",data);
-      this.products = data;
-      this.isLoading = false;
-    });
-  }
-
-  public getProductsByAlbumId(filter) {
-    console.log("filter-getProductsByAlbumId: ",filter)
-    if (filter==undefined) {
-      filter=1;
-    }
-    // change stat of item
-    for (var i=0; i<this.filters.length; i++) {
-        if (this.filters[i].name === filter) {
-          this.filters[i].status = !this.filters[i].status;
-        }
-    }
-
+  public getProducts(paramFromURL) {
     this.isLoading = true;
-    if (this.selectedFilters.indexOf("albumId="+filter)===-1) {
-      this.selectedFilters.push("albumId="+filter)
-    } else {
-      for (let i=0; i<this.selectedFilters.length; i++) {
-        if (this.selectedFilters[i]===("albumId="+filter)) {
-          this.selectedFilters.splice(i,1);  
-        }
-      }
-    };
-    if (!this.selectedFilters.length) {
-      this.getProductsList('');
-    }
-    //create this string to add url param (albumId=1&albumId=2&albumId=3&albumId=4)
-    this.paramFilters = this.selectedFilters.join('&');
-    console.log("this.paramFilters: ",this.paramFilters)
-    this.listProducts.getProductsByAlbumId(this.paramFilters).subscribe((data: Products[]) => {
+    this.listProducts.getProducts(paramFromURL).subscribe((data: Products[]) => {
       this.products = data;
       this.isLoading = false;
     });
+  }
+
+  public getAlbumList(paramFromURL, id?) {
+    this.tabIDParams=paramFromURL.split('&');
+
+    if (id) {
+      if (this.tabIDParams.indexOf("albumId="+id)===-1) {
+        this.tabIDParams.push("albumId="+id)
+      } else {
+         for (let i=0; i<this.tabIDParams.length; i++) {
+          if (this.tabIDParams[i]===("albumId="+id)) {
+            this.tabIDParams.splice(i,1);  
+          }
+         }
+      }
+      this.strParams=this.tabIDParams.join('&');
+      console.log("his.strParams final: ",this.strParams);
+      this.getProducts(this.strParams);
+    }
+    //console.log("this.tabIDParams: ",this.tabIDParams)
+    this.listProducts.getProducts('').subscribe((data: Products[]) => {
+      for (let i=0; i<data.length; i++) {
+        data[i].status=false;
+        for (let j=0; j<this.tabIDParams.length ; j++ ) {
+          if ("albumId="+data[i].albumId == this.tabIDParams[j]) {
+           data[i].status=true; 
+          }
+        }
+
+        if(this.filters.indexOf(data[i].albumId) === -1 && data[i].albumId<11) {
+          this.filters.push(data[i].albumId);
+          this.filtersStatus.push({
+            'albId':data[i].albumId,
+            'status': data[i].status
+          });
+        }
+      };
+      this.isLoading = false;
+     });
   }
 
 }
 
 /*
+
+
+/////////////
+
 product: Products;
 prodtucts: Products[];
 

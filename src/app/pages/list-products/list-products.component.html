@@ -6,7 +6,7 @@
     <hr>
       <div *ngFor='let item of filtersStatus'>
         <div>
-          <input type="checkbox" id="{{item.albId}}" name="filter-{{item.albId}}" (click)="getProductsByAlbumId(item.albId)" 
+          <input type="checkbox" id="{{item.albId}}" name="filter-{{item.albId}}" (click)="getAlbumList(strParams, item.albId)" 
           [(ngModel)]="item.status">
           <label for="{{item.albId}}" style="bottom: 2px; position: relative; left: 5px; cursor: pointer">albumId-{{item.albId}} 
           <span [ngStyle]="{'background-color': item.status ? 'green' : 'red' }">({{item.status}})</span></label>

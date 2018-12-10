@@ -27,7 +27,6 @@ export class SearchHomeComponent implements OnInit {
   /****/
   expanded = false;
   public showCheckboxes() {
-    console.log("showCheckboxes");
     var checkboxes = document.getElementById("checkboxes");
     if (!this.expanded) {
       checkboxes.style.display = "block";
@@ -48,13 +47,14 @@ export class SearchHomeComponent implements OnInit {
   }
 
   public getlbumIdList() {
+    var count=0;
     this.listProducts.getProducts('').subscribe((data) => {
-        for (let i=0; i<data.length; i++) {
-          if(this.albumIdList.indexOf(data[i].albumId) === -1 && data[i].albumId<11) {
-            this.albumIdList.push(data[i].albumId);
+        for (let item in data) {
+          if(this.albumIdList.indexOf(item) === -1 && count<11) {
+            this.albumIdList.push(item);
           }
+          count++;
         };
-        console.log("this.albumIdList: ",this.albumIdList);
     });
   }
 
@@ -64,7 +64,7 @@ export class SearchHomeComponent implements OnInit {
     var target = event.target;
     for (let i=0; i<target.length ; i++) {
       if (!!target[i].checked && target[i].value!='' && this.paramTab.indexOf("albumId="+target[i].value)===-1) {
-        this.paramTab.push("albumId="+target[i].defaultValue);
+        this.paramTab.push("albumId="+target[i].value);
       }
     }
 
