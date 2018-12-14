@@ -37,6 +37,7 @@ export class ListProductsComponent implements OnInit {
 
   ngOnInit() {
     this.strParams = this.route.snapshot.params.params;
+    //this.strParams = this.route.snapshot.paramMap.get("params")
     console.log("strParams getURL: ",this.strParams);
     this.getProducts(this.strParams);
     this.getAlbumList(this.strParams);
@@ -89,12 +90,23 @@ export class ListProductsComponent implements OnInit {
       this.isLoading = false;
      });
   }
-
 }
 
+
+
 /*
+// add param filter to url
+this.router.navigate(
+  ['/products'], 
+  {
+    relativeTo: this.route,
+    queryParams: { options: this.strParams },
+    queryParamsHandling: "merge",
+    //skipLocationChange: true
+  }
+ );*/
 
-
+/*
 /////////////
 
 product: Products;
